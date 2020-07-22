@@ -1,6 +1,6 @@
 export default {
     state: {
-        funds: 100,
+        funds: 1300.3,
         stocks: []
     },
     mutations: {
@@ -21,9 +21,30 @@ export default {
             if(record.quantity > quantity) {
                 record.quantity -= quantity
             } else {
-                state.stock.splice(state.stocks.indexOf(record), 1)
+                state.stocks.splice(state.stocks.indexOf(record), 1)
             }
             state.funds += stockPrice * quantity;
         }
-    }
+    },
+    actions: {
+        sellStock({ commit }, order) {
+            commit('sellStock', order)
+        }
+    },
+    getters: {
+        stockPortfolio(state, getters) {
+            return state.stocks.map(stock => {
+                const stockBase = getters.stocks.find(el => el.id == stock.id)
+                return {
+                    id: stock.id,
+                    quantity: stock.quantity,
+                    name: stockBase.name,
+                    price: stockBase.price
+                }
+            })
+        },
+        funds(state) {
+            return state.funds
+        }
+    },
 }
