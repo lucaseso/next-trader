@@ -1,5 +1,3 @@
-import stocksMock from '@/helpers/StocksMock'
-
 export default {
     state: {
         stocks: []
@@ -18,10 +16,8 @@ export default {
         buyStock({ commit }, order) {
             commit('buyStock', order)
         },
-        initStocks({ commit }) {
-            commit('setStocks', stocksMock)
-        },
-        randomizeStocks({ commit }) {
+        endDay({ commit }) {
+            commit('pushDay')
             commit('randomizeStocks')
         }
     },

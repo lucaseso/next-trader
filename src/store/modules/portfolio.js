@@ -1,7 +1,8 @@
 export default {
     state: {
         funds: 1300.3,
-        stocks: []
+        stocks: [],
+        history: []
     },
     mutations: {
         buyStock(state, { stockId, stockPrice, quantity }) {
@@ -28,6 +29,12 @@ export default {
         setPortfolio(state, portfolio) {
             state.funds = portfolio.funds;
             state.stocks = portfolio.stockPortfolio;
+        },
+        setHistory(state, history) {
+            state.history = history
+        },
+        pushDay(state) {
+            state.history.push(state.funds)
         }
     },
     actions: {
@@ -49,6 +56,9 @@ export default {
         },
         funds(state) {
             return state.funds
+        },
+        history(state) {
+            return state.history.slice(0, 30)
         }
     },
 }

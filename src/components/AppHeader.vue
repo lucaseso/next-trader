@@ -39,19 +39,20 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['funds'])
+    ...mapGetters(['funds', 'history'])
   },
   methods: {
     ...mapActions({
-      randomizeStocks: 'randomizeStocks',
+      endDayAction: 'endDay',
       loadDataAction: 'loadData'
     }),
     endDay() {
-      this.randomizeStocks()
+      this.endDayAction()
     },
     saveData() {
-      const { funds, stockPortfolio, stocks } = this.$store.getters
-      this.$http.put('data.json', { funds, stockPortfolio, stocks }).then(data => {
+      const { funds, stockPortfolio, stocks, history } = this.$store.getters
+      
+      this.$http.put('data.json', { funds, stockPortfolio, stocks, history }).then(data => {
         console.log(data);
       }).catch(error => {
         console.log(error);

@@ -6,17 +6,13 @@
 
 <script>
 import Stock from './Stock'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { Stock },
-  created() {
-    this.initStocks()
-  },
   computed: {
     ...mapGetters(['stocks'])
   },
-  methods: mapActions(['initStocks'])
 }
 </script>
 
